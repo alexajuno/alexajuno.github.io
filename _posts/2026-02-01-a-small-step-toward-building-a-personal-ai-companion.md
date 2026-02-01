@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "a small step toward building a personal ai companion"
+title: "A small step toward building a personal ai companion"
 date: 2026-02-01
 categories: [tech]
 tags: [ai, claude]
 ---
 
-# a small step toward building a personal ai companion
+# A small step toward building a personal ai companion
 
 Recently there is a new tool released, receiving high attention and praises from people, one of the fastest repo getting stars in GitHub, which is OpenClaw. And there are a few things around this I would want to share.
 
