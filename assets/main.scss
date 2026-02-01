@@ -1,0 +1,269 @@
+---
+---
+
+// Custom variables (override Minima defaults)
+$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+$base-font-size: 16px;
+$base-font-weight: 400;
+$base-line-height: 1.5;
+
+$heading-font-weight: 600;
+$code-font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+// Colors - Clean modern palette
+$brand-color: #2563eb;
+$brand-color-light: lighten($brand-color, 35%);
+$brand-color-dark: darken($brand-color, 20%);
+
+$text-color: #1e293b;
+$text-color-light: #64748b;
+$background-color: #ffffff;
+$code-background-color: #f8fafc;
+
+$grey-color: #64748b;
+$grey-color-light: #e2e8f0;
+$grey-color-dark: #334155;
+
+$content-width: 720px;
+$spacing-unit: 20px;
+
+// Import Minima
+@import "minima";
+
+// Custom styles
+
+// Global improvements
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100px);
+  min-height: 100vh;
+}
+
+// Better header
+.site-header {
+  border-top: 3px solid $brand-color;
+  border-bottom: 1px solid $grey-color-light;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.site-title {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  &:hover {
+    text-decoration: underline;
+    color: $brand-color;
+  }
+}
+
+.site-nav .page-link {
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $brand-color;
+  }
+}
+
+// Typography improvements
+h1, h2, h3, h4, h5, h6 {
+  color: $text-color;
+  letter-spacing: -0.01em;
+  margin-top: 1.25em;
+  margin-bottom: 0.4em;
+}
+
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.25em; }
+h3 { font-size: 1.1em; }
+
+p {
+  margin-bottom: 1em;
+}
+
+// Better links
+a {
+  color: $brand-color;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $brand-color-dark;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+}
+
+// Post list - compact inline layout
+.post-list {
+  margin-left: 0;
+  list-style: none;
+
+  > li {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    padding: 0.35em 0;
+    border-bottom: 1px solid $grey-color-light;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.post-meta {
+  font-size: 0.8em;
+  color: $text-color-light;
+  font-family: $code-font-family;
+  flex-shrink: 0;
+}
+
+.post-link {
+  font-size: 0.95em;
+  font-weight: 400;
+
+  &:hover {
+    text-decoration: underline;
+    color: $brand-color;
+  }
+}
+
+// Post content
+.post-title {
+  font-size: 1.5em;
+  letter-spacing: -0.01em;
+  margin-top: 0;
+}
+
+.post-content {
+  h2 {
+    border-bottom: 1px solid $grey-color-light;
+    padding-bottom: 0.5em;
+  }
+}
+
+// Code blocks
+pre, code {
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+pre {
+  padding: 0.75em 1em;
+  background: #1e293b;
+  color: #e2e8f0;
+  overflow-x: auto;
+
+  code {
+    background: transparent;
+    color: inherit;
+  }
+}
+
+code {
+  background: $code-background-color;
+  padding: 0.2em 0.4em;
+  border: 1px solid $grey-color-light;
+}
+
+// Blockquotes
+blockquote {
+  border-left: 3px solid $brand-color;
+  background: $code-background-color;
+  padding: 0.75em 1em;
+  margin: 1em 0;
+  border-radius: 0 4px 4px 0;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Footer
+.site-footer {
+  border-top: 1px solid $grey-color-light;
+  background: #f8fafc;
+}
+
+.footer-col-wrapper {
+  font-size: 0.9em;
+}
+
+// Page content wrapper
+.page-content {
+  padding-top: $spacing-unit;
+  padding-bottom: $spacing-unit;
+}
+
+// Home page
+.home {
+  h1 {
+    font-size: 1.25em;
+    margin-bottom: 1em;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid $grey-color-light;
+  }
+}
+
+// Lists in content
+.post-content ul, .post-content ol {
+  margin-bottom: 1em;
+
+  li {
+    margin-bottom: 0.25em;
+  }
+}
+
+// Responsive improvements
+@media screen and (max-width: 600px) {
+  .post-title {
+    font-size: 1.3em;
+  }
+
+  .post-link {
+    font-size: 1em;
+  }
+
+  h1 { font-size: 1.3em; }
+  h2 { font-size: 1.15em; }
+  h3 { font-size: 1.05em; }
+}
+
+// Selection color
+::selection {
+  background: lighten($brand-color, 35%);
+}
+
+// Smooth image loading
+img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+// Tables
+table {
+  width: 100%;
+  margin-bottom: 1em;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 0.5em 0.75em;
+    border: 1px solid $grey-color-light;
+  }
+
+  th {
+    background: $code-background-color;
+    font-weight: 600;
+  }
+
+  tr:hover td {
+    background: rgba($brand-color, 0.03);
+  }
+}
