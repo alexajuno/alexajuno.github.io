@@ -6,8 +6,6 @@ categories: [tech]
 tags: [vibe-coding, architecture, deployment]
 ---
 
-# When Vibe Coding Meets Multi-Tenant Architecture
-
 Recently Canny.io increased their pricing so we decided to vibe code an internal tool for customer feedback management for our products. It's coming to an mvp and well, it's been a while since my last writing so I think this is a good time to share some thoughts.
 
 It's first time receiving investment into infrastructure, from the company for my craft. So it's honestly a real product that I completely in control from front to back. I'm happy about the learning opportunity in this project.
@@ -26,4 +24,4 @@ The first related problem is resolving subdomain from an url. In local developme
 
 Another huge problem is deployment. We used Digital Ocean App Platform for hosting, and actually, everything was just fine with path resolve until there is another component appears: that's is the marketing pages. At first, things are `appname.io` with path for `/admin`, `/embed`, root `/` for main app. But having market page, it will be placed directly at root too `/`, and this causes problem for routing, in which taking precendence over the path of other components. We had a headache of this for a while. At first, we thought that trying to be a normal app again, with subdomain for components, like `api.appname.io`, `admin.appname.io`, etc. but this won't work with subdomain for workspaces, since the whole request flow was designed for path resolve and it goes like `{workspace}.appname.io/admin`, to `{workspace}.appname.io/api`, and api receives the whole url with subdomain included. Moving to `api.` requires a huge change in code, and I can't bear this. So after a while in weekend, playing around with config, I found a solution using authority config in Digital Ocean App Spec. The authority field lets you match requests based on the exact hostname. By adding `authority: exact: appname.io` to the homepage and related root-domain rules, those rules only match the root domain. Then I duplicated the rules for /admin, /api, etc. without the authority field, these will help with catch all workspace subdomain requests like {workspace}.appname.io/admin. This way, appname.io/ serves the marketing homepage, while acme.appname.io/ serves the actual app, both coexisting on the same path / but differentiated by hostname.
 
-***(to be continued...)***
+*(to be continued...)*

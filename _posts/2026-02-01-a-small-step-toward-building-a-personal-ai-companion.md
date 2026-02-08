@@ -6,8 +6,6 @@ categories: [tech]
 tags: [ai, claude]
 ---
 
-# A small step toward building a personal AI companion
-
 Recently there is a new tool released, receiving high attention and praises from people, one of the fastest repo getting stars in GitHub, which is OpenClaw. And there are a few things around this I would want to share.
 
 In a few recent months, I spent time working on building AI companion. The biggest problems with popular chatbots like Gemini, specifically context/memory, is, sometimes it's just, not what I need. Why I say that? It uses context when I don't want. And when it does? It feels, irrelevant. As long as I can see, it only saves a few facts about us in data, call it memory. But human can't feel the companion in this way. Some basic facts like names, address, etc. is necessary. But trying to remember someone likes banana? No thanks, that can change very quickly. So honestly it sucks with memory.

@@ -1,0 +1,1 @@
+Don't add `# Title` heading in post content - Jekyll renders title from frontmatter automatically.
