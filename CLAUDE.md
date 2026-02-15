@@ -4,4 +4,5 @@ Don't add `# Title` heading in post content - Jekyll renders title from frontmat
 
 ## Commands
 
-`bundle exec jekyll serve` - Local dev server (http://127.0.0.1:4000/)
+`docker compose up` - Local dev server (http://127.0.0.1:4000/) with live reload
+`docker compose down` - Stop the server
