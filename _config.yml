@@ -20,7 +20,7 @@
 
 title: alexajuno
 email: giolynx104@gmail.com
-description: A small garden of mine.
+description: personal website
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: giolynx104
@@ -50,3 +50,5 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+exclude:
+  - CLAUDE.md
