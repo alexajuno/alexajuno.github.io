@@ -154,6 +154,8 @@ pre, code {
   font-size: 0.9em;
 }
 
+// Override Minima's .highlighter-rouge .highlight background
+.highlighter-rouge .highlight,
 pre {
   padding: 0.75em 1em;
   background: #1e293b;
@@ -163,7 +165,18 @@ pre {
   code {
     background: transparent;
     color: inherit;
+    border: none;
   }
+
+  // Syntax highlighting colors for dark background
+  .k, .kd, .kn, .kp, .kr, .kt { color: #93c5fd; } // keywords
+  .s, .s1, .s2, .sb, .sc, .dl { color: #86efac; }  // strings
+  .mi, .mf, .mh, .mo, .il { color: #fde68a; }      // numbers
+  .n, .na, .nb, .nc, .ni, .ne, .nf, .nl, .nn, .no, .nv { color: #e2e8f0; } // names
+  .o, .p { color: #cbd5e1; }                         // operators, punctuation
+  .c, .c1, .cm, .cp, .cs { color: #64748b; font-style: italic; } // comments
+  .nt { color: #7dd3fc; }                            // tags
+  .err { color: #fca5a5; }                           // errors
 }
 
 code {
