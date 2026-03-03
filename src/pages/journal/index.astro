@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.categories.includes("life"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+type Post = (typeof posts)[number];
+type MonthGroup = { month: string; posts: Post[] };
+type YearGroup = { year: number; count: number; months: MonthGroup[] };
+
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+const timeline: YearGroup[] = [];
+let currentYear: YearGroup | null = null;
+let currentMonth: MonthGroup | null = null;
+
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  const month = monthNames[post.data.date.getMonth()];
+
+  if (!currentYear || currentYear.year !== year) {
+    currentYear = { year, count: 0, months: [] };
+    currentMonth = null;
+    timeline.push(currentYear);
+  }
+
+  if (!currentMonth || currentMonth.month !== month) {
+    currentMonth = { month, posts: [] };
+    currentYear.months.push(currentMonth);
+  }
+
+  currentMonth.posts.push(post);
+  currentYear.count++;
+}
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+---
+
+<BaseLayout title="Journal — alexajuno" description="Thoughts on life, figuring things out, and whatever's on my mind.">
+  <section class="pt-8 pb-8 sm:pt-12 sm:pb-10">
+    <h1 class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl">Journal</h1>
+    <p class="animate-fade-in-up delay-100 mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+      Thoughts on life, figuring things out, and whatever's on my mind.
+    </p>
+  </section>
+
+  <div class="relative space-y-10 pl-6 sm:pl-8">
+    {/* Timeline line */}
+    <div class="absolute top-2 bottom-0 left-[7px] w-px bg-zinc-200 sm:left-[11px] dark:bg-zinc-800" />
+
+    {
+      timeline.map((yearGroup) => (
+        <section class="relative">
+          {/* Year marker */}
+          <div class="animate-fade-in-up relative mb-6 flex items-center gap-3">
+            <div class="absolute -left-6 flex h-4 w-4 items-center justify-center sm:-left-8 sm:h-6 sm:w-6">
+              <div class="h-3 w-3 rounded-full border-2 border-zinc-400 bg-white sm:h-3.5 sm:w-3.5 dark:border-zinc-500 dark:bg-zinc-950" />
+            </div>
+            <h2 class="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              {yearGroup.year}
+            </h2>
+            <span class="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400">
+              {yearGroup.count} {yearGroup.count === 1 ? "post" : "posts"}
+            </span>
+          </div>
+
+          <div class="space-y-8">
+            {yearGroup.months.map((monthGroup) => (
+              <div class="relative">
+                {/* Month marker */}
+                <div class="animate-fade-in-up relative mb-3 flex items-center gap-2">
+                  <div class="absolute -left-6 flex h-4 w-4 items-center justify-center sm:-left-8 sm:h-6 sm:w-6">
+                    <div class="h-1.5 w-1.5 rounded-full bg-zinc-300 dark:bg-zinc-600" />
+                  </div>
+                  <h3 class="text-sm font-semibold tracking-wide text-zinc-500 uppercase dark:text-zinc-400">
+                    {monthGroup.month}
+                  </h3>
+                </div>
+
+                <ul class="space-y-3">
+                  {monthGroup.posts.map((post) => (
+                    <li>
+                      <a
+                        href={`/journal/${post.id}`}
+                        class="animate-fade-in-up card-hover group block rounded-xl border border-zinc-200 p-5 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700"
+                      >
+                        <h4 class="text-lg font-semibold text-zinc-900 transition-colors group-hover:text-accent-600 dark:text-zinc-100 dark:group-hover:text-accent-400">
+                          {post.data.title}
+                        </h4>
+                        <time
+                          datetime={post.data.date.toISOString()}
+                          class="mt-1 block text-sm text-zinc-500 dark:text-zinc-500"
+                        >
+                          {formatDate(post.data.date)}
+                        </time>
+                        {post.data.description && (
+                          <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                            {post.data.description}
+                          </p>
+                        )}
+                        {post.data.tags.length > 0 && (
+                          <div class="mt-3 flex flex-wrap gap-2">
+                            {post.data.tags.map((tag: string) => (
+                              <span class="inline-block rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
