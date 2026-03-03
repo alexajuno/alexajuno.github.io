@@ -1,11 +1,14 @@
 # Blog Guide
 
-Don't add `# Title` heading in post content - Jekyll renders title from frontmatter automatically.
-
 ## Commands
 
-`docker compose up` - Local dev server (http://127.0.0.1:4000/) with live reload
-`docker compose down` - Stop the server
+`npm run dev` - Local dev server (http://localhost:4321) with live reload
+`npm run build` - Production build
+
+## Content
+
+- Blog posts: `src/content/blog/`
+- Projects: `src/content/projects/`
 
 ## Writing Style
 
@@ -21,6 +24,6 @@ Don't add `# Title` heading in post content - Jekyll renders title from frontmat
 ## Post Conventions
 
 - Filename: `YYYY-MM-DD-slug.md`
-- Frontmatter: layout, title, date, categories, tags
+- Frontmatter fields: title, date, description, categories (array), tags (optional array)
 - Categories: `[tech]`
-- No `# Title` in body (rendered from frontmatter)
+- Don't add `# Title` heading in post content. Title is rendered from frontmatter.
