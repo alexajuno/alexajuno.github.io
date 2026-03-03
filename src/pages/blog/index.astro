@@ -17,17 +17,20 @@ function formatDate(date: Date) {
 
 <BaseLayout title="Blog" description="Writing about building real projects as a developer.">
   <section class="pb-16 pt-8 sm:pb-20 sm:pt-12">
-    <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
-    <p class="mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+    <h1 class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
+    <p class="animate-fade-in-up delay-100 mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
       Writing about building things, lessons learned, and figuring it out along the way.
     </p>
   </section>
 
-  <ul class="space-y-8">
+  <ul class="space-y-4">
     {
       posts.map((post) => (
-        <li class="animate-fade-in-up card-hover group rounded-lg border-b border-zinc-200 pb-8 last:border-0 dark:border-zinc-800">
-          <a href={`/blog/${post.id}`} class="block">
+        <li>
+          <a
+            href={`/blog/${post.id}`}
+            class="animate-fade-in-up card-hover group block rounded-xl border border-zinc-200 p-5 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700"
+          >
             <h2 class="text-lg font-semibold text-zinc-900 transition-colors group-hover:text-violet-600 dark:text-zinc-100 dark:group-hover:text-violet-400">
               {post.data.title}
             </h2>

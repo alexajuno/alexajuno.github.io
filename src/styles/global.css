@@ -95,7 +95,7 @@ html {
 .nav-link::after {
   content: "";
   position: absolute;
-  bottom: 0.25rem;
+  bottom: 0;
   left: 0.75rem;
   right: 0.75rem;
   height: 1.5px;
@@ -107,4 +107,20 @@ html {
 
 .nav-link:hover::after {
   transform: scaleX(1);
+}
+
+/* Reduced motion: skip animations for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up {
+    opacity: 1;
+    animation: none;
+  }
+
+  .card-hover {
+    transition: none;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
 }
