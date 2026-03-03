@@ -7,9 +7,11 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  ogType?: string;
 }
 
-const { title = "alexajuno", description } = Astro.props;
+const { title = "alexajuno", description, ogType = "website" } = Astro.props;
+const canonicalURL = Astro.url;
 ---
 
 <html lang="en" class="">
@@ -20,6 +22,19 @@ const { title = "alexajuno", description } = Astro.props;
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@giolynx104" />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
 
     <!-- Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
