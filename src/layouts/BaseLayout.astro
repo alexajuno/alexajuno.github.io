@@ -45,15 +45,20 @@ const canonicalURL = Astro.url;
     <!-- Prevent flash of wrong theme -->
     <script is:inline>
       (function () {
-        const theme = localStorage.getItem("theme");
-        if (
-          theme === "dark" ||
-          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
+        function applyTheme() {
+          const theme = localStorage.getItem("theme");
+          if (
+            theme === "dark" ||
+            (!theme &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
         }
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
       })();
     </script>
   </head>
