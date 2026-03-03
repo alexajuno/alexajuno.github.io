@@ -9,7 +9,7 @@ This evening, I was packing up to go home. A senpai at work suddenly texted me a
 
 Here's the full story. Recently I've been thinking about being more of myself. Showing people who I am, letting the filter down. Playing at full strength. In badminton, that means playing competitively, not casually. And in the process, I hit the shuttle hard into a colleague's face. It hurt her.
 
-At the time, everyone gathered around her to check if she was okay. I did the normal thing on the court, raised my hand to say sorry. But beyond that, nothing. I thought about going up to her, but what would I say? "Are you okay?" when she's clearly not? It felt fake. I didn't know how to show concern in a way that didn't feel like performing. So instead of doing something that felt hollow, I did nothing. And then the thought kicked in, "I'm a bad guy, I should just leave." So I packed up. From the outside, it looked like I didn't care at all.
+At the time, everyone gathered around her to check if she was okay. I did the normal thing on the court, raised my hand to say sorry. But beyond that, nothing. I thought about going up to her, but what would I say? "Are you okay?" when she's clearly not? It felt fake. I didn't know how to show concern in a way that didn't feel like performing. And honestly, if it were me getting hit, I'd just take care of myself and move on. So I assumed she'd do the same. She didn't. Most people don't. But I didn't know that then. So instead of doing something that felt hollow, I did nothing. And then the thought kicked in, "I'm a bad guy, I should just leave." So I packed up. From the outside, it looked like I didn't care at all.
 
 Later that evening, I got the message. And that feeling hit me.
 
@@ -27,4 +27,4 @@ And I wondered. Will someone ever sit down and ask "what happened?" instead of j
 
 It's hard to find such a person. And honestly, even I don't know how to be that person for someone else. If someone makes a mistake, I normally don't blame them much. But at the same time, I don't know how to gracefully sit with someone through theirs, the way I wish people would sit with mine. So I can't really expect it from others.
 
-But then what? I don't know. I think I just have to keep writing. Keep broadcasting. And maybe, eventually, someone will read this and say "I know exactly what he means."
+But then what? I don't know. That cruel voice will still be there. I'll still freeze up next time probably. The idea is, keep walking forward as always.
