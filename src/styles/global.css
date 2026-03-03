@@ -6,6 +6,19 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  /* Accent colors — change these to retheme the entire site */
+  --color-accent-50: #fafafa;
+  --color-accent-300: #a1a1aa;
+  --color-accent-400: #a1a1aa;
+  --color-accent-500: #71717a;
+  --color-accent-600: #27272a;
+  --color-accent-700: #18181b;
+  --color-accent-950-50: rgba(9, 9, 11, 0.5);
+
+  /* Selection */
+  --color-accent-selection: rgba(0, 0, 0, 0.1);
+  --color-accent-selection-dark: rgba(255, 255, 255, 0.15);
 }
 
 /* Smooth scrolling */
@@ -13,14 +26,14 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Subtle violet-tinted selection */
+/* Accent-tinted selection */
 ::selection {
-  background-color: rgba(139, 92, 246, 0.2);
+  background-color: var(--color-accent-selection);
   color: inherit;
 }
 
 .dark ::selection {
-  background-color: rgba(139, 92, 246, 0.3);
+  background-color: var(--color-accent-selection-dark);
 }
 
 /* Code block styling for prose */

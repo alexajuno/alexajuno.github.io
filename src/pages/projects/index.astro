@@ -8,7 +8,7 @@ const projects = (await getCollection("projects")).sort(
 ---
 
 <BaseLayout title="Projects — alexajuno" description="Things I've built while learning to code.">
-  <section class="pb-16 pt-8 sm:pb-20 sm:pt-12">
+  <section class="pb-8 pt-8 sm:pb-20 sm:pt-12">
     <h1 class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl">Projects</h1>
     <p class="animate-fade-in-up delay-100 mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
       Things I've built while learning to code.
@@ -29,7 +29,7 @@ const projects = (await getCollection("projects")).sort(
                   href={project.data.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-zinc-400 transition-colors hover:text-violet-600 dark:hover:text-violet-400"
+                  class="text-zinc-400 transition-colors hover:text-accent-600 dark:hover:text-accent-400"
                   aria-label={`${project.data.title} on GitHub`}
                 >
                   <svg
@@ -47,7 +47,7 @@ const projects = (await getCollection("projects")).sort(
                   href={project.data.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="text-zinc-400 transition-colors hover:text-violet-600 dark:hover:text-violet-400"
+                  class="text-zinc-400 transition-colors hover:text-accent-600 dark:hover:text-accent-400"
                   aria-label={`${project.data.title} live site`}
                 >
                   <svg
@@ -73,7 +73,7 @@ const projects = (await getCollection("projects")).sort(
           </p>
           <div class="mt-4 flex flex-wrap gap-2">
             {project.data.tech.map((t: string) => (
-              <span class="inline-block rounded-full bg-violet-50 px-2.5 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-950/50 dark:text-violet-300">
+              <span class="inline-block rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-medium text-accent-700 dark:bg-accent-950-50 dark:text-accent-300">
                 {t}
               </span>
             ))}
