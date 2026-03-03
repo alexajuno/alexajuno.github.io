@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostFooter from "../../components/PostFooter.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -15,6 +16,18 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const allPosts = (await getCollection("blog"))
+  .filter((p) => p.data.categories.includes("tech"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const currentIndex = allPosts.findIndex((p) => p.id === post.id);
+const prevPost = currentIndex < allPosts.length - 1
+  ? { slug: allPosts[currentIndex + 1].id, title: allPosts[currentIndex + 1].data.title }
+  : null;
+const nextPost = currentIndex > 0
+  ? { slug: allPosts[currentIndex - 1].id, title: allPosts[currentIndex - 1].data.title }
+  : null;
+
 function formatDate(date: Date) {
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -25,7 +38,7 @@ function formatDate(date: Date) {
 ---
 
 <BaseLayout title={`${post.data.title} — alexajuno`} description={post.data.description} ogType="article">
-  <article>
+  <article id="top">
     <header class="pb-8">
       <a
         href="/blog"
@@ -58,20 +71,17 @@ function formatDate(date: Date) {
         >
           {formatDate(post.data.date)}
         </time>
-        {post.data.tags.length > 0 && (
-          <div class="flex flex-wrap gap-2">
-            {post.data.tags.map((tag: string) => (
-              <span class="inline-block rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
     </header>
 
     <div class="prose prose-zinc max-w-none dark:prose-invert prose-headings:font-semibold prose-a:text-accent-600 prose-a:no-underline hover:prose-a:underline dark:prose-a:text-accent-400">
       <Content />
     </div>
+
+    <PostFooter
+      tags={post.data.tags}
+      prevPost={prevPost}
+      nextPost={nextPost}
+    />
   </article>
 </BaseLayout>

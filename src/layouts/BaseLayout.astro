@@ -71,6 +71,16 @@ const canonicalURL = Astro.url;
     </main>
     <Footer />
 
+    <!-- Back to Top -->
+    <a
+      id="back-to-top"
+      href="#"
+      class="fixed bottom-6 right-6 z-50 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white/80 text-zinc-500 opacity-0 shadow-sm backdrop-blur transition-all hover:text-zinc-900 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-400 dark:hover:text-zinc-100 pointer-events-none"
+      aria-label="Back to top"
+    >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m18 15-6-6-6 6"/></svg>
+    </a>
+
     <!-- Scroll-triggered fade-in animations -->
     <script>
       function setupScrollAnimations() {
@@ -93,6 +103,29 @@ const canonicalURL = Astro.url;
 
       setupScrollAnimations();
       document.addEventListener("astro:after-swap", setupScrollAnimations);
+    </script>
+
+    <script>
+      function setupBackToTop() {
+        const btn = document.getElementById("back-to-top");
+        if (!btn) return;
+
+        function toggle() {
+          if (window.scrollY > 400) {
+            btn.classList.remove("opacity-0", "pointer-events-none");
+            btn.classList.add("opacity-100", "pointer-events-auto");
+          } else {
+            btn.classList.add("opacity-0", "pointer-events-none");
+            btn.classList.remove("opacity-100", "pointer-events-auto");
+          }
+        }
+
+        window.addEventListener("scroll", toggle, { passive: true });
+        toggle();
+      }
+
+      setupBackToTop();
+      document.addEventListener("astro:after-swap", setupBackToTop);
     </script>
   </body>
 </html>

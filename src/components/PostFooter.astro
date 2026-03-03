@@ -1,0 +1,47 @@
+---
+interface Props {
+  tags: string[];
+  prevPost?: { slug: string; title: string } | null;
+  nextPost?: { slug: string; title: string } | null;
+}
+
+const { tags, prevPost, nextPost } = Astro.props;
+---
+
+<footer class="mt-16 border-t border-dashed border-orange-500/40">
+  <!-- Tags -->
+  {tags.length > 0 && (
+    <div class="flex flex-wrap gap-2 pt-6">
+      {tags.map((tag: string) => (
+        <span class="rounded-full border border-zinc-200 px-3 py-1 text-xs text-zinc-500 dark:border-zinc-700 dark:text-zinc-400">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <!-- Previous / Next -->
+  {(prevPost || nextPost) && (
+    <div class="mt-8 grid grid-cols-2 gap-4">
+      {prevPost ? (
+        <a href={`/blog/${prevPost.slug}`} class="group flex items-start gap-2">
+          <svg class="mt-1 h-5 w-5 shrink-0 text-zinc-400 transition-colors group-hover:text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg>
+          <div>
+            <span class="text-sm text-zinc-500 dark:text-zinc-400">Previous Post</span>
+            <p class="font-medium italic text-orange-600 transition-colors group-hover:text-orange-500 dark:text-orange-400 dark:group-hover:text-orange-300">{prevPost.title}</p>
+          </div>
+        </a>
+      ) : <div />}
+
+      {nextPost ? (
+        <a href={`/blog/${nextPost.slug}`} class="group flex items-start gap-2 justify-end text-right col-start-2">
+          <div>
+            <span class="text-sm text-zinc-500 dark:text-zinc-400">Next Post</span>
+            <p class="font-medium italic text-orange-600 transition-colors group-hover:text-orange-500 dark:text-orange-400 dark:group-hover:text-orange-300">{nextPost.title}</p>
+          </div>
+          <svg class="mt-1 h-5 w-5 shrink-0 text-zinc-400 transition-colors group-hover:text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+        </a>
+      ) : <div />}
+    </div>
+  )}
+</footer>
