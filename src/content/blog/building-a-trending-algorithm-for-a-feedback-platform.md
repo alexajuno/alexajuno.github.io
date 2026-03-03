@@ -1,9 +1,9 @@
 ---
-layout: post
 title: "Building a Trending Algorithm for a Feedback Platform"
 date: 2026-02-24
 categories: [tech]
 tags: [algorithm, laravel, bridz]
+description: "Why the Hacker News trending formula doesn't work for feedback platforms, and how a simple vote-velocity approach turned out to be the right answer."
 ---
 
 This is another post in the Bridz series. This time about the journey of building a trending algorithm for a customer feedback platform.

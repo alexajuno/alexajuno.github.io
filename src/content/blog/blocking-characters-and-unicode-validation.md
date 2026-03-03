@@ -1,8 +1,8 @@
 ---
-layout: post
 title: "Blocking Characters and Unicode Validation"
 date: 2025-11-08 07:50:36 +0700
-categories: tech
+categories: [tech]
+description: "What I learned about Unicode character categorization and why silently removing user input is almost always a bad UX decision."
 ---
 
 Recently I had a chance to work on blocking certain characters from user input in a text field. It sounds simple on the surface, but it ended up dragging me into the weird and slightly chaotic world of Unicode.

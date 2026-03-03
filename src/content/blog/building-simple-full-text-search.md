@@ -1,8 +1,8 @@
 ---
-layout: post
 title: "Building a Simple Full-Text Search Feature"
 date: 2025-07-28 00:10:57 +0700
-categories: tech
+categories: [tech]
+description: "Lessons from implementing full-text search with Typesense in a production app, from engine selection to search history UX."
 ---
 
 # Building a Simple Yet Scalable Full-Text Search Feature
@@ -15,7 +15,7 @@ Typesense's concepts are similar to MongoDB, involving ideas like clusters, coll
 
 Another critical aspect was access management. There were two main approaches. If the frontend wants to query Typesense directly, we could use its scoped API key system to enforce per-user access control. However, in our case, the backend already implemented a robust multi-tenancy model. So instead, we filtered results by organization_id using the filter_by parameter, while leveraging the backend's existing access scopes to determine what each staff member could see.
 
-Both methods are valid depending on the architecture. Looking back, I’m not entirely sure why I went with the latter—perhaps I hadn’t fully weighed the trade-offs at the time. Initially, I mistakenly tried to use both systems in tandem, but later on, people realized that was redundant. In the end, it was simplified by removing the scoped API keys and relying solely on the backend's access control logic, since this approach is faster than querying Typesense with a scoped API key and avoids additional code complexity.
+Both methods are valid depending on the architecture. Looking back, I'm not entirely sure why I went with the latter—perhaps I hadn't fully weighed the trade-offs at the time. Initially, I mistakenly tried to use both systems in tandem, but later on, people realized that was redundant. In the end, it was simplified by removing the scoped API keys and relying solely on the backend's access control logic, since this approach is faster than querying Typesense with a scoped API key and avoids additional code complexity.
 
 Regarding deployment, although cloud services generally provide convenience and reliability, for this relatively new and optional feature, we chose self-hosting. Our setup is intentionally simple compared to Typesense's extensive deployment guidelines. As long as we manage our hosting responsibly, this approach shouldn't introduce major issues.
 

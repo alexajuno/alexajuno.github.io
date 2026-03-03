@@ -1,9 +1,9 @@
 ---
-layout: post
 title: "When Vibe Coding Meets Multi-Tenant Architecture"
 date: 2026-02-01
 categories: [tech]
 tags: [vibe-coding, architecture, deployment]
+description: "What happened when we tried to vibe-code a multi-tenant SaaS product, and the deployment headaches of subdomain-based workspaces."
 ---
 
 Recently Canny.io increased their pricing so we decided to vibe code an internal tool for customer feedback management for our products. It's coming to an mvp and well, it's been a while since my last writing so I think this is a good time to share some thoughts.

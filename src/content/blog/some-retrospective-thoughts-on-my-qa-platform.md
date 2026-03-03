@@ -1,11 +1,9 @@
 ---
-layout: post
 title: "Some Retrospective Thoughts on Building JAMC - A Q&A Platform"
 date: 2025-06-05 00:50:32 +0700
-categories: tech
+categories: [tech]
+description: "A look back at building JAMC, a Q&A platform for classrooms, and the gap between a GitHub project and a real product."
 ---
-
-# Some Retrospective Thoughts on Building JAMC - A Q&A Platform
 
 ## Why I Started
 

@@ -1,26 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const recentPosts = [
-  {
-    title: "Building My Personal Site with Astro",
-    date: "2026-03-01",
-    href: "#",
-  },
-  {
-    title: "What I Learned from My First Internship",
-    date: "2026-02-20",
-    href: "#",
-  },
-  {
-    title: "Why I Switched from Jekyll to Astro",
-    date: "2026-02-10",
-    href: "#",
-  },
-];
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+const recentPosts = allPosts.slice(0, 3);
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-US", {
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -74,17 +62,17 @@ function formatDate(dateStr: string) {
         recentPosts.map((post) => (
           <li>
             <a
-              href={post.href}
+              href={`/blog/${post.id}`}
               class="group block"
             >
               <span class="font-medium text-zinc-900 transition-colors group-hover:text-violet-600 dark:text-zinc-100 dark:group-hover:text-violet-400">
-                {post.title}
+                {post.data.title}
               </span>
               <time
-                datetime={post.date}
+                datetime={post.data.date.toISOString()}
                 class="mt-1 block text-sm text-zinc-500 dark:text-zinc-500"
               >
-                {formatDate(post.date)}
+                {formatDate(post.data.date)}
               </time>
             </a>
           </li>

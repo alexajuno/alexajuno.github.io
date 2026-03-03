@@ -1,12 +1,12 @@
 ---
-layout: post
 title: "Adding Email to Bridz"
 date: 2026-02-15
 categories: [tech]
 tags: [email, laravel, bridz]
+description: "The journey from getting rejected by AWS SES to building a custom Laravel notification channel for Brevo email delivery."
 ---
 
-This is a continuation of my previous post about [building Bridz](/tech/2026/02/01/when-vibe-coding-meets-multi-tenant-architecture.html). In the last week, the most important feature I built was email notifications.
+This is a continuation of my previous post about [building Bridz](/blog/when-vibe-coding-meets-multi-tenant-architecture). In the last week, the most important feature I built was email notifications.
 
 ## Choosing a Provider
 
