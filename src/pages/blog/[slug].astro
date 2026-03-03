@@ -3,7 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog");
+  const posts = (await getCollection("blog")).filter((post) =>
+    post.data.categories.includes("tech")
+  );
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
