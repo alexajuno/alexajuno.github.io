@@ -1,7 +1,114 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const recentPosts = [
+  {
+    title: "Building My Personal Site with Astro",
+    date: "2026-03-01",
+    href: "#",
+  },
+  {
+    title: "What I Learned from My First Internship",
+    date: "2026-02-20",
+    href: "#",
+  },
+  {
+    title: "Why I Switched from Jekyll to Astro",
+    date: "2026-02-10",
+    href: "#",
+  },
+];
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
 ---
 
-<BaseLayout title="alexajuno">
-  <h1 class="text-4xl font-bold tracking-tight">Hello, world</h1>
+<BaseLayout
+  title="alexajuno"
+  description="Giao's personal site — writing about building real projects as a developer."
+>
+  <!-- Hero -->
+  <section class="pb-16 pt-8 sm:pb-20 sm:pt-12">
+    <h1
+      class="text-4xl font-bold tracking-tight sm:text-5xl"
+    >
+      Hi, I'm{" "}
+      <span
+        class="bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent dark:from-violet-400 dark:to-fuchsia-400"
+      >
+        Giao
+      </span>
+    </h1>
+    <p
+      class="mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
+    >
+      A developer who builds things and writes about the process. Less than a
+      year in, figuring it out one project at a time.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href="/blog"
+        class="inline-flex items-center rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+      >
+        Read the blog
+      </a>
+      <a
+        href="/projects"
+        class="inline-flex items-center rounded-lg border border-zinc-300 px-5 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        See projects
+      </a>
+    </div>
+  </section>
+
+  <!-- Recent Posts -->
+  <section class="border-t border-zinc-200 pt-12 dark:border-zinc-800">
+    <h2 class="text-xl font-semibold tracking-tight">Recent Posts</h2>
+    <ul class="mt-6 space-y-6">
+      {
+        recentPosts.map((post) => (
+          <li>
+            <a
+              href={post.href}
+              class="group block"
+            >
+              <span class="font-medium text-zinc-900 transition-colors group-hover:text-violet-600 dark:text-zinc-100 dark:group-hover:text-violet-400">
+                {post.title}
+              </span>
+              <time
+                datetime={post.date}
+                class="mt-1 block text-sm text-zinc-500 dark:text-zinc-500"
+              >
+                {formatDate(post.date)}
+              </time>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      href="/blog"
+      class="mt-8 inline-flex items-center gap-1 text-sm font-medium text-violet-600 transition-colors hover:text-violet-500 dark:text-violet-400 dark:hover:text-violet-300"
+    >
+      View all posts
+      <svg
+        class="h-4 w-4"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="2"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"></path>
+      </svg>
+    </a>
+  </section>
 </BaseLayout>
