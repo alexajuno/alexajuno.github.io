@@ -26,7 +26,7 @@ function formatDate(date: Date) {
   <ul class="space-y-8">
     {
       posts.map((post) => (
-        <li class="group border-b border-zinc-200 pb-8 last:border-0 dark:border-zinc-800">
+        <li class="animate-fade-in-up card-hover group rounded-lg border-b border-zinc-200 pb-8 last:border-0 dark:border-zinc-800">
           <a href={`/blog/${post.id}`} class="block">
             <h2 class="text-lg font-semibold text-zinc-900 transition-colors group-hover:text-violet-600 dark:text-zinc-100 dark:group-hover:text-violet-400">
               {post.data.title}

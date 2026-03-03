@@ -23,7 +23,7 @@ function formatDate(date: Date) {
   <!-- Hero -->
   <section class="pb-16 pt-8 sm:pb-20 sm:pt-12">
     <h1
-      class="text-4xl font-bold tracking-tight sm:text-5xl"
+      class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl"
     >
       Hi, I'm{" "}
       <span
@@ -33,21 +33,21 @@ function formatDate(date: Date) {
       </span>
     </h1>
     <p
-      class="mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
+      class="animate-fade-in-up delay-100 mt-4 max-w-lg text-lg leading-relaxed text-zinc-600 dark:text-zinc-400"
     >
       A developer who builds things and writes about the process. Less than a
       year in, figuring it out one project at a time.
     </p>
-    <div class="mt-8 flex flex-wrap gap-4">
+    <div class="animate-fade-in-up delay-200 mt-8 flex flex-wrap gap-4">
       <a
         href="/blog"
-        class="inline-flex items-center rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
+        class="inline-flex items-center rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-medium text-white transition-all hover:scale-[1.02] hover:bg-zinc-700 active:scale-[0.98] dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
       >
         Read the blog
       </a>
       <a
         href="/projects"
-        class="inline-flex items-center rounded-lg border border-zinc-300 px-5 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+        class="inline-flex items-center rounded-lg border border-zinc-300 px-5 py-2.5 text-sm font-medium text-zinc-700 transition-all hover:scale-[1.02] hover:bg-zinc-100 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
       >
         See projects
       </a>
@@ -55,12 +55,12 @@ function formatDate(date: Date) {
   </section>
 
   <!-- Recent Posts -->
-  <section class="border-t border-zinc-200 pt-12 dark:border-zinc-800">
+  <section class="animate-fade-in-up border-t border-zinc-200 pt-12 dark:border-zinc-800">
     <h2 class="text-xl font-semibold tracking-tight">Recent Posts</h2>
     <ul class="mt-6 space-y-6">
       {
         recentPosts.map((post) => (
-          <li>
+          <li class="animate-fade-in-up">
             <a
               href={`/blog/${post.id}`}
               class="group block"
