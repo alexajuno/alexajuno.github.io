@@ -115,9 +115,4 @@ php artisan tinker --execute="Cache::forget('vite_manifest');"
 
 One line. Clear the Redis cache, API fetches the new manifest, embed HTML now references the correct files. Then purge Cloudflare cache so the poisoned JS responses get evicted.
 
-## Takeaway
-
-The three caches layers of Redis, Cloudflare, and the browser are each doing exactly what they should, but conspiring to hide the problem from me and extend the outage for everyone else. The fix was one line of PHP. The diagnosis was like 1.5 hours.
-
-I'm still not sure the SPA catchall is the right pattern when you have hashed static assets behind a CDN. It was a bit misleading with the 200 status code. I still need to build that automation. For now, it's a manual step on the deploy checklist.
-
+But that's still a manual step. Every future app deploy would need the same cache clear. So I looked at the actual performance cost of the cache. The manifest fetch is a server-to-server HTTP call. The API fetching a tiny JSON file from the static site in the same region, maybe 5-20ms. So I decided it's not worth the risk. I removed the Redis cache entirely.
