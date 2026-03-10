@@ -24,3 +24,5 @@ In the end, I don't think the hollow feeling comes from arrogance. It comes from
 I have one data point. One company, one environment. I genuinely don't know how good I am or how far I can go. The only way to find out is to go try harder things and let the results tell me.
 
 So the plan is simple. Pull back from the comfortable stuff. Train harder. Go deeper. Not to prove anything. Just to get more data points.
+
+PS (March 10): Two days later, I took down the service for almost two hours. Turns out the problems were always there. I just hadn't looked deep enough.
