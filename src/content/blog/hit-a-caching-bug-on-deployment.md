@@ -30,29 +30,29 @@ All four components are deployed on DigitalOcean's App Platform under a single a
 
 ## The Trigger
 
-I pushed to two repos almost simultaneously. First, the app repo — a Volar Pug plugin for better template type-checking and a type refactor, since normal Volar can't detect Pug templates. Then the SDK repo with a few cleanup commits and a new feature. Both repos have `deploy_on_push: true` on DigitalOcean, so both triggered rebuilds at the same time.
+I pushed to two repos almost simultaneously. First, for the app repo it was a Volar Pug plugin for better template type-checking and a type refactor, since normal Volar can't detect Pug templates. Then the SDK repo with a few cleanup commits and a new feature. Just a daily dev stuffs. both triggered rebuilds at the same time.
 
-The app rebuild produced new hashed filenames. What was `embed-Ds2a99rp.js` became `embed-D1FFUYRV.js`. What was `embed-DI3syuOY.css` became `embed-BQl7_AHz.css`. The old files were gone — the build uses `--emptyOutDir` to clean the output directory. The new manifest file reflected the new hashes.
+The app rebuild produced new hashed filenames. `embed-Ds2a99rp.js` became `embed-D1FFUYRV.js`. `embed-DI3syuOY.css` became `embed-BQl7_AHz.css`. The old files were gone. New manifest, new hashes.
 
-The SDK had four commits that morning — cleaning up AI-generated noise files, removing an unused constant, updating the README, and most importantly, adding theme parameter pass-through so the SDK now forwards `config.theme` to the embed iframe URL. That last one was a real feature change, not just cleanup. It meant the new SDK would send `?theme=light` to the embed, while the old one wouldn't.
+The SDK had a few commits that morning: cleaning up AI-generated noise files, removing an unused constant, updating the README, and adding theme parameter pass-through so the SDK now forwards `config.theme` to the embed iframe URL. That last one was a real feature change. The new SDK would send `?theme=light` to the embed. The old one wouldn't.
 
-But here's the problem: the SDK builds to `v1.iife.js` — a **stable filename with no hash**. That's by design, so customers never need to update their embed code. But it also means there's no cache-busting. Cloudflare had the old SDK cached with `s-maxage=86400`, so after the rebuild it kept serving the previous version for up to 24 hours. Users would get the old SDK (without theme support) talking to the new embed (expecting theme params) for a full day. In this case the embed handled missing theme params gracefully, so it didn't break. But the risk is real — any SDK change that alters the embed URL format or the message protocol could silently fail for 24 hours while Cloudflare serves the stale file.
+The SDK builds to `v1.iife.js`, a stable filename with no hash. That's by design, so customers never need to update their embed code. But it means no cache busting. Cloudflare had the old SDK cached with `s-maxage=86400`, so after the rebuild it kept serving the previous version for up to 24 hours. In this case the embed handled missing theme params gracefully, so it didn't break. But the risk is real. Any SDK change that alters the embed URL format or the message protocol could silently fail for a full day while Cloudflare serves the stale file.
 
-The bigger problem was the app rebuild. The API didn't know it happened. It had the old manifest sitting in Redis, still pointing to `embed-Ds2a99rp.js`. That Redis cache wouldn't expire for up to another hour. So every time someone loaded the widget, the API served embed HTML with `<script type="module" src="/assets/embed/embed-Ds2a99rp.js">` — pointing to a file that no longer existed on the static site.
+The bigger problem was the app rebuild. The API didn't know it happened. It had the old manifest sitting in Redis, still pointing to `embed-Ds2a99rp.js`. That Redis cache wouldn't expire for up to another hour. So every time someone loaded the widget, the API served embed HTML with `<script type="module" src="/assets/embed/embed-Ds2a99rp.js">`, pointing to a file that no longer existed.
 
-And because the two deploys overlapped (the SDK deploy started, then the app deploy started and superseded it partway through), there was a window where the platform was mid-rebuild across multiple components simultaneously. Requests hitting the system during that window could get partial or inconsistent responses.
+The two deploys also overlapped. SDK deploy started, then the app deploy started and superseded it partway through. There was a window where the platform was mid-rebuild across multiple components at the same time. Requests during that window could get partial or inconsistent responses.
 
 ## The Cascade
 
-Here's where it gets interesting. Three things went wrong in sequence, each making the situation worse.
+Three things went wrong in sequence.
 
-**First: DigitalOcean's SPA catchall.** The app is configured as a single-page application on DO's App Platform with a `catchall_document: public.html` setting. Any request that doesn't match an actual file gets routed to the app's HTML shell. This is what makes client-side routing work — if someone visits `/feature-requests/my-cool-idea`, there's no file at that path, but the catchall serves the Vue app which handles the route client-side.
+**First** was DigitalOcean's SPA catchall. The app is configured with `catchall_document: public.html`, so any request that doesn't match an actual file gets routed to the Vue app's HTML shell. That's how client side routing works. Someone visits `/feature-requests/my-cool-idea`, no file exists there, so DO serves the shell and Vue handles the route.
 
-The problem is that this catchall doesn't distinguish between "this is a client-side route" and "this file genuinely doesn't exist." When a browser requested `embed-Ds2a99rp.js`, the file was gone, so DO served `public.html` instead — with `content-type: text/html` and HTTP status 200. Not 404. As far as anything downstream was concerned, this was a successful response.
+The catchall doesn't know the difference between a valid route and a missing file. When the browser requested `embed-Ds2a99rp.js`, the file was gone. DO served `public.html` instead. Content type `text/html`, status 200. Not 404. Everything downstream thought it was a successful response.
 
-**Second: Cloudflare cached the bad response.** Cloudflare saw a 200 response for a URL ending in `.js`. The response headers said `s-maxage=86400` — "cache this for 24 hours." So it did. Now every subsequent request for that JS file, from any user hitting that edge node, got the cached HTML response back. No request even reached DigitalOcean anymore.
+**Second**, Cloudflare cached that. It saw a 200 for a `.js` URL with `s-maxage=86400` in the headers. Cached for 24 hours. Now every user hitting that edge node got back an HTML file instead of JavaScript. No request even reached DigitalOcean anymore.
 
-**Third: Chrome's strict MIME checking.** The embed HTML loads its JavaScript with `<script type="module">`. The HTML spec says browsers must enforce MIME type checking for module scripts — if the server responds with anything other than a JavaScript MIME type, the browser must refuse to execute it. Chrome and Edge follow this strictly. So when they got `text/html` for what should be a module script, they rejected it:
+**Third** was Chrome's MIME type checking. The embed loads its JavaScript with `<script type="module">`. The spec says browsers must check MIME types for module scripts. If the response isn't a JavaScript MIME type, the browser refuses to execute it. Chrome and Edge follow this strictly. So when they got `text/html` where they expected JavaScript, they rejected it:
 
 ```
 Failed to load module script: Expected a JavaScript-or-Wasm module script
@@ -60,41 +60,41 @@ but the server responded with a MIME type of "text/html".
 Strict MIME type checking is enforced for module scripts per HTML spec.
 ```
 
-The widget was completely broken. No JavaScript executed, no UI rendered, just an empty iframe on the customer's site.
+Widget completely broken. Empty iframe. Nothing rendered.
 
-Firefox is more lenient with MIME checking — it'll attempt to parse the response regardless. So if someone tested in Firefox, it might have appeared to work. "It works in Firefox but not Chrome" sounds like a browser compatibility issue, not a caching issue. That threw me off for a while.
+Firefox is more lenient. It'll try to parse the response anyway. So if you tested in Firefox, it might have looked fine. "Works in Firefox, not Chrome" sounds like a browser compatibility bug, not a caching bug. That threw me off for a while.
 
 ## Why It Worked For Me
 
-This played out in two phases, and each time I was the last person to see the problem.
+This played out in two phases, and both times I was the last to see the problem.
 
-**At first: browser cache.** I'd been using Firefox and visiting the site all along, so my browser had the old (correct) JavaScript file in its local cache from before the deploy. It never even made the request to Cloudflare. From my perspective, everything was fine. I could refresh, navigate, test different boards — all good. I asked people to hard refresh. Ctrl+Shift+R. But the embed widget loads inside an iframe, and hard-refreshing the parent page doesn't necessarily clear cached subresources loaded by the iframe. So even that didn't help them.
+First, browser cache. I'd been using Firefox all day, so my browser had the old JavaScript file cached from before the deploy. It never even made a request. Everything looked fine on my end. I asked people to hard refresh. Ctrl+Shift+R. But the widget loads inside an iframe, and hard refreshing the parent page doesn't clear subresources cached by the iframe. So that didn't help them.
 
-**Even after the Cloudflare purge: browser MIME checking.** After the Cloudflare purge and some back and forth, I opened Chrome to test it fresh — no cache, first visit. Still broken. But it worked in my Firefox. That's when the browser difference became clear. Chrome and Edge strictly enforce MIME type checking for `type="module"` scripts and refuse to execute anything that isn't `text/javascript`. Firefox doesn't enforce this as strictly. So even after the CDN cache issue was partially resolved, Chrome users were still getting rejected because some Cloudflare edge nodes still had the poisoned `text/html` response cached, and Chrome wouldn't tolerate it. Firefox would.
+Then even after the Cloudflare purge, I opened Chrome to test fresh. Still broken. But Firefox worked. That's when the browser difference clicked. Some Cloudflare edge nodes still had the poisoned `text/html` response cached. Chrome rejected it. Firefox didn't.
 
-I had been debugging the whole time in the one browser that was most forgiving of the problem.
+I'd been debugging the whole time in the one browser that was most forgiving of the problem.
 
 ## The Wrong Fix
 
-At this point I was under pressure. People couldn't use the widget. My first instinct was to look at what changed. I had just pushed a few commits: a Volar Pug plugin for template type-checking, some type error fixes, and a refactor to unify attachment types. Maybe the new dev dependency was pulling in something heavy? Maybe the type refactor broke a runtime import?
+People couldn't use the widget and I was under pressure. My first instinct was to look at what changed. I'd just pushed a Volar Pug plugin, some type fixes, a refactor. Maybe the new dependency pulled in something heavy? Maybe the type refactor broke a runtime import?
 
-I reverted all pushed commits immediately as the pressure was escalating. `git reset --hard` to the previous known-good commit. Force pushed to master. DigitalOcean picked it up and started another rebuild.
+I reverted everything. `git reset --hard` to the previous known good commit. Force pushed to master. DigitalOcean started another rebuild.
 
-That triggered yet another set of hashed filenames. Now there were three different sets of hashes floating around: the original ones in people's browser caches, the ones from my first push that Cloudflare had cached, and the brand new ones from the revert. The API's Redis cache was still stale from the first deploy. Every push was making things worse.
+That triggered a new set of hashed filenames. Now there were three sets floating around: the originals in people's browser caches, the ones from my first push that Cloudflare had cached, and the new ones from the revert. The API's Redis cache was still stale. Every push was making things worse.
 
-I tried to hit "Purge Everything" on Cloudflare. The natural instinct of the CDN is serving stale content, flush the cache. It didn't help. The widget was still broken. Purging Cloudflare just meant the next request went straight to the origin, but the origin was still serving the wrong thing. The API's Redis cache still pointed to the old hashes, so the API generated embed HTML referencing files that didn't exist, DO returned the HTML catchall, and Cloudflare immediately re-cached the bad response. We were back to square one within seconds of the purge.
+I hit "Purge Everything" on Cloudflare. Still broken. Purging just meant the next request went to the origin, but the origin was still serving the wrong thing. Redis still pointed to the old hashes. API generated embed HTML referencing files that didn't exist. DO returned the catchall HTML. Cloudflare re-cached it immediately. Back to square one within seconds.
 
 ## Finding the Real Problem
 
-I exported a HAR file from Chrome DevTools and a line in it told me a bit about story:
+I exported a HAR file from Chrome DevTools. One line explained a lot:
 
 ```
 200  132ms  586B  text/html  bridz.io/assets/embed/embed-Ds2a99rp.js
 ```
 
-586 bytes of HTML where there should have been 488KB of JavaScript. The response headers confirmed it: `cf-cache-status: HIT` — Cloudflare was serving this from its edge cache. And `x-do-orig-status: 404` — the original response from DigitalOcean was a 404 that the SPA catchall converted to a 200.
+586 bytes of HTML where there should have been 488KB of JavaScript. Response headers: `cf-cache-status: HIT` and `x-do-orig-status: 404`. Cloudflare was serving a cached response that originally came back as a 404.
 
-Then I fetched the Vite manifest that the app's static site was actually serving:
+Then I fetched the actual Vite manifest from the static site:
 
 ```json
 {
@@ -105,14 +105,14 @@ Then I fetched the Vite manifest that the app's static site was actually serving
 }
 ```
 
-The manifest said `embed-D1FFUYRV.js`. The API was serving HTML that referenced `embed-Ds2a99rp.js`. A clear mismatch. The API was reading from an old manifest cached in Redis.
+The manifest said `embed-D1FFUYRV.js`. The API was serving HTML referencing `embed-Ds2a99rp.js`. Clear mismatch. The API was reading from the old Redis cache.
 
-So, the final fix was:
+The fix:
 
 ```php
 php artisan tinker --execute="Cache::forget('vite_manifest');"
 ```
 
-One line. Clear the Redis cache, API fetches the new manifest, embed HTML now references the correct files. Then purge Cloudflare cache so the poisoned JS responses get evicted.
+One line. Clear Redis, API fetches the new manifest, embed HTML references the correct files. Then purge Cloudflare so the poisoned responses get evicted.
 
-But that's still a manual step. Every future app deploy would need the same cache clear. So I looked at the actual performance cost of the cache. The manifest fetch is a server-to-server HTTP call. The API fetching a tiny JSON file from the static site in the same region, maybe 5-20ms. So I decided it's not worth the risk. I removed the Redis cache entirely.
+But that's a manual step. Any future app deploy would need the same thing. So I checked the actual cost of skipping the cache. The manifest fetch is just a server to server HTTP call in the same region, maybe 5-20ms. Not worth the risk. I removed the Redis cache entirely.
