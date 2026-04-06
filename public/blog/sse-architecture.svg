@@ -1,0 +1,181 @@
+<!--
+  LAYOUT GRID
+  ===========
+  COLUMNS (x-axis)
+    col-client:     40 ── 200    center=120   w=160
+    col-controller: 260 ── 420   center=340   w=160
+    col-stream:     480 ── 640   center=560   w=160
+    col-redis:      700 ── 860   center=780   w=160
+
+  ROWS (y-axis)
+    row-top:        40 ── 100    center=70    h=60     (Client + Controller + Stream + Redis)
+    gap-1:          100 ── 148                h=48     (annotation zone)
+    row-mid:        148 ── 208   center=178   h=60     (Observer + Job)
+    gap-2:          208 ── 256                h=48     (annotation zone)
+    row-bot:        256 ── 316   center=286   h=60     (Task Model + AI Provider)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 340" width="920" height="340">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#85B7EB"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#EF9F27"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#5DCAA5"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#E87B7B"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9" fill="none" stroke="#B89AE8"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <!-- ===== ROW TOP: Client → Controller → StreamService → Redis ===== -->
+
+  <rect x="40" y="40" width="160" height="60" rx="8"
+        fill="#444441" stroke="#85B7EB" stroke-width="1.2"/>
+  <text x="120" y="60" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">Browser</text>
+  <text x="120" y="80" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">EventSource</text>
+
+  <rect x="260" y="40" width="160" height="60" rx="8"
+        fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+  <text x="340" y="60" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">TaskController</text>
+  <text x="340" y="80" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">GET /tasks/{id}/stream</text>
+
+  <rect x="480" y="40" width="160" height="60" rx="8"
+        fill="#444441" stroke="#EF9F27" stroke-width="1.2"/>
+  <text x="560" y="60" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">StreamService</text>
+  <text x="560" y="80" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">StreamedResponse</text>
+
+  <rect x="700" y="40" width="160" height="60" rx="8"
+        fill="#444441" stroke="#E87B7B" stroke-width="1.2"/>
+  <text x="780" y="60" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">Redis</text>
+  <text x="780" y="80" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">BLPOP / LPUSH</text>
+
+  <!-- ===== ROW MID: Observer + Job ===== -->
+
+  <rect x="480" y="148" width="160" height="60" rx="8"
+        fill="#444441" stroke="#5DCAA5" stroke-width="1.2"/>
+  <text x="560" y="168" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">TaskObserver</text>
+  <text x="560" y="188" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">on status change</text>
+
+  <rect x="700" y="148" width="160" height="60" rx="8"
+        fill="#444441" stroke="#B89AE8" stroke-width="1.2"/>
+  <text x="780" y="168" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">ProcessTask</text>
+  <text x="780" y="188" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">Queue Job</text>
+
+  <!-- ===== ROW BOT: Task Model + AI Provider ===== -->
+
+  <rect x="480" y="256" width="160" height="60" rx="8"
+        fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+  <text x="560" y="276" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">Task Model</text>
+  <text x="560" y="296" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">status: enum</text>
+
+  <rect x="700" y="256" width="160" height="60" rx="8"
+        fill="#444441" stroke="#B4B2A9" stroke-width="0.5"/>
+  <text x="780" y="276" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="14" font-weight="500" fill="#D3D1C7">AI Provider</text>
+  <text x="780" y="296" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui,sans-serif" font-size="11" fill="#B4B2A9">External API</text>
+
+  <!-- ===== ARROWS ===== -->
+
+  <!-- 1. Client → Controller (blue) -->
+  <line x1="200" y1="70" x2="260" y2="70"
+        stroke="#85B7EB" stroke-width="1.2" marker-end="url(#arrow-blue)"/>
+
+  <!-- 2. Controller → StreamService (orange) -->
+  <line x1="420" y1="70" x2="480" y2="70"
+        stroke="#EF9F27" stroke-width="1.2" marker-end="url(#arrow-orange)"/>
+
+  <!-- 3. StreamService → Redis BLPOP (red) -->
+  <line x1="640" y1="70" x2="700" y2="70"
+        stroke="#E87B7B" stroke-width="1.2" marker-end="url(#arrow-red)"/>
+
+  <!-- 4. ProcessTask → AI Provider (purple, straight down) -->
+  <line x1="780" y1="208" x2="780" y2="256"
+        stroke="#B89AE8" stroke-width="1.2" marker-end="url(#arrow-purple)"/>
+
+  <!-- 5. ProcessTask → Task Model (purple, L-shape: left then down) -->
+  <path d="M 700 190 L 656 190 L 656 286 L 640 286"
+        fill="none" stroke="#B89AE8" stroke-width="1.2" marker-end="url(#arrow-purple)"/>
+
+  <!-- 6. Task Model → TaskObserver (green, straight up) -->
+  <line x1="560" y1="256" x2="560" y2="208"
+        stroke="#5DCAA5" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+
+  <!-- 7. TaskObserver → Redis LPUSH (green, L-shape: right then up) -->
+  <path d="M 640 165 L 690 165 L 690 85 L 700 85"
+        fill="none" stroke="#5DCAA5" stroke-width="1.2" marker-end="url(#arrow-green)"/>
+
+  <!-- ===== STEP BADGES ===== -->
+
+  <!-- Badge 1: SSE connect (gap-1, col-client/controller) -->
+  <circle cx="230" cy="124" r="13" fill="#85B7EB"/>
+  <text x="230" y="124" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#0C447C">1</text>
+  <text x="254" y="117" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#85B7EB">SSE connect</text>
+  <text x="254" y="131" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#85B7EB">text/event-stream</text>
+
+  <!-- Badge 2: BLPOP wait (above row-top, col-stream/redis) -->
+  <circle cx="670" cy="28" r="13" fill="#E87B7B"/>
+  <text x="670" y="28" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#5C1A1A">2</text>
+  <text x="694" y="21" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#E87B7B">BLPOP blocks 5s</text>
+  <text x="694" y="35" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#E87B7B">heartbeat on timeout</text>
+
+  <!-- Badge 3: Job flow (gap-2, col-redis) -->
+  <circle cx="880" cy="232" r="13" fill="#B89AE8"/>
+  <text x="880" y="232" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#3A2566">3</text>
+  <text x="880" y="217" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="10" fill="#B89AE8">calls provider,</text>
+  <text x="880" y="249" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="10" fill="#B89AE8">updates status</text>
+
+  <!-- Badge 4: Observer publishes (gap-1, col-stream) -->
+  <circle cx="440" cy="124" r="13" fill="#5DCAA5"/>
+  <text x="440" y="124" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="12" font-weight="700" fill="#085041">4</text>
+  <text x="464" y="117" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#5DCAA5">Observer fires</text>
+  <text x="464" y="131" text-anchor="start" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="11" fill="#5DCAA5">LPUSH to Redis</text>
+
+  <!-- Heartbeat annotation (dashed) -->
+  <rect x="498" y="4" width="124" height="24" rx="12"
+        fill="none" stroke="#E87B7B" stroke-width="1" stroke-dasharray="5 3"/>
+  <text x="560" y="16" text-anchor="middle" dy="0.35em"
+        font-family="system-ui,sans-serif" font-size="10" fill="#E87B7B">": heartbeat\n\n"</text>
+</svg>
