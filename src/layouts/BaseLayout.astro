@@ -2,7 +2,6 @@
 import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import Analytics from "@vercel/analytics/astro";
 import "../styles/global.css";
 
 interface Props {
@@ -71,7 +70,10 @@ const canonicalURL = Astro.url;
       <slot />
     </main>
     <Footer />
-    <Analytics />
+
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "755d706dbd95439abeae9c15458a1399"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 
     <!-- Back to Top -->
     <a
