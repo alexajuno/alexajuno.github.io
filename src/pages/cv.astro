@@ -1,0 +1,262 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const contacts = [
+  { label: "giolynx104@gmail.com", href: "mailto:giolynx104@gmail.com" },
+  { label: "GitHub", href: "https://github.com/alexajuno" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/giao-le-02606b323",
+  },
+];
+
+const experience = [
+  {
+    role: "Software Developer",
+    company: "Qikify",
+    location: "Hanoi",
+    period: "Jun 2025 – Present",
+    bullets: [
+      "Designed, built, and shipped <strong>Bridz</strong> end-to-end: a multi-tenant customer-feedback platform (Laravel + Vue) replacing <strong>Canny</strong> across Qikify and Teeinblue (~3,000+ engaged users).",
+      "Built its <strong>core platform features</strong>: a vote-velocity trending algorithm, Brevo-backed notifications, and SSE-based real-time task streaming over Redis BLPOP.",
+      "Built a centralized <strong>Typesense search service</strong> indexing ~2–3M entities, owning the indexing pipeline and query/filter design.",
+      "Built a generic <strong>soft-delete / restore layer</strong> across nearly all customer-facing models, eliminating accidental-deletion data loss.",
+      "Implemented <strong>rate limiting</strong> on Shopify-storefront endpoints, using encrypted-header anonymous identity to harden anti-abuse.",
+    ],
+  },
+  {
+    role: "Backend Developer Intern",
+    company: "PIP Vietnam Technology",
+    location: "",
+    period: "Nov 2024 – Jan 2025",
+    bullets: [
+      "Built and maintained backend services in <strong>ExpressJS / TypeScript / MongoDB</strong>.",
+      "Designed REST APIs from product requirements.",
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: "Phileas",
+    tagline: "Open-source local-first long-term memory for LLM agents",
+    meta: "Python · MCP · MIT",
+    href: "https://github.com/alexajuno/phileas",
+    bullets: [
+      "Local-first memory layer that any LLM reads and writes over <strong>MCP</strong>, so context survives across sessions and tools instead of resetting each conversation.",
+      "Model-agnostic hybrid retrieval over BM25, semantic vectors, and knowledge-graph search, re-ranked with a local cross-encoder; runs on-device with no external API key.",
+      "Designed and shipped <strong>solo, end-to-end</strong>: retrieval engine, MCP server, ingestion pipeline, and CLI, published to PyPI under MIT.",
+      "Used daily as my own working memory.",
+    ],
+  },
+];
+
+const skills = [
+  { label: "Languages", items: "PHP, Python, JavaScript/TypeScript, SQL" },
+  { label: "Frameworks", items: "Laravel, Vue" },
+  {
+    label: "Data & search",
+    items: "PostgreSQL, Redis, Typesense; vector and graph stores",
+  },
+  {
+    label: "LLM systems",
+    items: "MCP, hybrid retrieval, embeddings and reranking",
+  },
+  { label: "Infra", items: "Docker, Linux, CI/CD, Cloudflare" },
+];
+
+const languages = [
+  { label: "Vietnamese", level: "Native" },
+  { label: "English", level: "Working proficiency" },
+];
+---
+
+<BaseLayout title="CV — alexajuno" description="Giao Le Xuan — Software Engineer. Experience, projects, and skills.">
+  <!-- Header -->
+  <section class="border-b border-zinc-200 pb-8 pt-8 dark:border-zinc-800 sm:pb-10 sm:pt-12">
+    <h1 class="animate-fade-in-up text-4xl font-bold tracking-tight sm:text-5xl">
+      Giao Le Xuan
+    </h1>
+    <p class="animate-fade-in-up delay-100 mt-3 text-lg text-zinc-600 dark:text-zinc-400">
+      Software Engineer · Hanoi, Vietnam · Open to remote
+    </p>
+
+    <div class="animate-fade-in-up delay-100 mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+      <a
+        href="/giao-le-resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex h-9 items-center gap-2 rounded-lg border border-zinc-300 px-3.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+      >
+        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        Download PDF
+      </a>
+    </div>
+
+    <div class="animate-fade-in-up delay-200 mt-5 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-500">
+      {
+        contacts.map((c, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">·</span>}
+            <a
+              href={c.href}
+              target={c.href.startsWith("http") ? "_blank" : undefined}
+              rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              class="transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+            >
+              {c.label}
+            </a>
+          </>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="animate-fade-in-up border-b border-zinc-200 py-8 dark:border-zinc-800">
+    <p class="max-w-2xl text-base leading-relaxed text-zinc-700 dark:text-zinc-300">
+      Backend engineer focused on search, retrieval, and the systems behind LLM
+      agents. I like owning things end-to-end, from architecture to production,
+      and I build Phileas, an open-source memory layer for LLM agents, in the
+      open.
+    </p>
+  </section>
+
+  <!-- Experience -->
+  <section class="border-b border-zinc-200 py-8 dark:border-zinc-800">
+    <h2 class="animate-fade-in-up text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+      Experience
+    </h2>
+    <div class="mt-6 space-y-8">
+      {
+        experience.map((job) => (
+          <div class="animate-fade-in-up">
+            <div class="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                {job.role} · {job.company}{job.location && (
+                  <span class="font-normal text-zinc-500 dark:text-zinc-400">, {job.location}</span>
+                )}
+              </h3>
+              <span class="shrink-0 text-sm tabular-nums text-zinc-500 dark:text-zinc-500">
+                {job.period}
+              </span>
+            </div>
+            <ul class="mt-3 space-y-2">
+              {job.bullets.map((b) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                  <span set:html={b} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="border-b border-zinc-200 py-8 dark:border-zinc-800">
+    <h2 class="animate-fade-in-up text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+      Projects
+    </h2>
+    <div class="mt-6 space-y-8">
+      {
+        projects.map((p) => (
+          <div class="animate-fade-in-up">
+            <div class="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="transition-colors hover:text-accent-600 dark:hover:text-accent-400"
+                  >
+                    {p.title}
+                  </a>
+                ) : (
+                  p.title
+                )}
+              </h3>
+              <span class="shrink-0 text-sm text-zinc-500 dark:text-zinc-500">
+                {p.meta}
+              </span>
+            </div>
+            <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+              {p.tagline}
+            </p>
+            <ul class="mt-3 space-y-2">
+              {p.bullets.map((b) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                  <span class="mt-2 h-1 w-1 shrink-0 rounded-full bg-zinc-400 dark:bg-zinc-600" />
+                  <span set:html={b} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="border-b border-zinc-200 py-8 dark:border-zinc-800">
+    <h2 class="animate-fade-in-up text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+      Education
+    </h2>
+    <div class="animate-fade-in-up mt-6 flex flex-wrap items-baseline justify-between gap-3">
+      <div>
+        <h3 class="text-base font-semibold text-zinc-900 dark:text-zinc-100">
+          Bachelor of Computer Science
+        </h3>
+        <p class="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+          Hanoi University of Science and Technology
+        </p>
+      </div>
+      <span class="shrink-0 text-sm tabular-nums text-zinc-500 dark:text-zinc-500">
+        Oct 2021 – Sep 2025
+      </span>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="border-b border-zinc-200 py-8 dark:border-zinc-800">
+    <h2 class="animate-fade-in-up text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+      Skills
+    </h2>
+    <dl class="animate-fade-in-up mt-6 space-y-3">
+      {
+        skills.map((s) => (
+          <div class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+            <dt class="w-32 shrink-0 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              {s.label}
+            </dt>
+            <dd class="text-sm text-zinc-600 dark:text-zinc-400">{s.items}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <!-- Languages -->
+  <section class="py-8">
+    <h2 class="animate-fade-in-up text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+      Languages
+    </h2>
+    <dl class="animate-fade-in-up mt-6 space-y-3">
+      {
+        languages.map((l) => (
+          <div class="flex flex-col gap-1 sm:flex-row sm:gap-4">
+            <dt class="w-32 shrink-0 text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              {l.label}
+            </dt>
+            <dd class="text-sm text-zinc-600 dark:text-zinc-400">{l.level}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+</BaseLayout>
