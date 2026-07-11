@@ -71,13 +71,15 @@ const projects = (await getCollection("projects")).sort(
           <p class="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
             {project.data.description}
           </p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            {project.data.tech.map((t: string) => (
-              <span class="inline-block rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-medium text-accent-700 dark:bg-accent-950-50 dark:text-accent-300">
-                {t}
-              </span>
-            ))}
-          </div>
+          {project.data.tech.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {project.data.tech.map((t: string) => (
+                <span class="inline-block rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-medium text-accent-700 dark:bg-accent-950-50 dark:text-accent-300">
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
         </li>
       ))
     }
