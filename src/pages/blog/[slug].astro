@@ -78,10 +78,6 @@ function formatDate(date: Date) {
       <Content />
     </div>
 
-    <PostFooter
-      tags={post.data.tags}
-      prevPost={prevPost}
-      nextPost={nextPost}
-    />
+    <PostFooter prevPost={prevPost} nextPost={nextPost} />
   </article>
 </BaseLayout>

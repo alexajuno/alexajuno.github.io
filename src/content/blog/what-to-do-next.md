@@ -2,7 +2,6 @@
 title: "What Do I Do Next?"
 date: 2025-11-30
 categories: [life]
-tags: [planning, goals]
 description: "A Sunday ramble about feeling stuck, not knowing what comes next, and deciding to just take small steps and let things unfold."
 ---
 

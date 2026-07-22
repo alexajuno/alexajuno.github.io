@@ -2,7 +2,6 @@
 title: "Hit a Caching Bug on Deployment"
 date: 2026-03-10
 categories: [tech]
-tags: [caching, deployment, cloudflare, bridz]
 description: "A production debugging story where three layers of caching conspired to break our embed widget after a routine deploy."
 ---
 

@@ -2,7 +2,6 @@
 title: "Streaming with Server-Sent Events"
 date: 2026-04-06
 categories: [tech]
-tags: [sse, laravel, streaming, redis]
 description: "How we built real-time task streaming for an AI API using SSE, Redis BLPOP, and Laravel's StreamedResponse. And what I learned about SSE along the way."
 ---
 

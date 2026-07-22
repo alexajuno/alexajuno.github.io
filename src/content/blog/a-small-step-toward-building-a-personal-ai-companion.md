@@ -2,7 +2,6 @@
 title: "A small step toward building a personal AI companion"
 date: 2026-02-01
 categories: [tech]
-tags: [ai, claude]
 description: "How I went from structured databases to a simple markdown-based personal context system for Claude Code after being inspired by OpenClaw."
 ---
 

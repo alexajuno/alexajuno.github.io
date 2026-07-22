@@ -2,7 +2,6 @@
 title: "When Vibe Coding Meets Multi-Tenant Architecture"
 date: 2026-02-01
 categories: [tech]
-tags: [vibe-coding, architecture, deployment]
 description: "What happened when we tried to vibe-code a multi-tenant SaaS product, and the deployment headaches of subdomain-based workspaces."
 ---
 
