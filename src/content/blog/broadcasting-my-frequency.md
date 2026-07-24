@@ -1,7 +1,6 @@
 ---
 title: "Broadcasting my frequency"
 date: 2026-03-03
-categories: [life]
 description: "Why I decided to start writing about my life here, not just tech."
 ---
 

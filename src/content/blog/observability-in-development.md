@@ -1,7 +1,6 @@
 ---
 title: "Observability in Development"
 date: 2025-11-30
-categories: [tech]
 description: "Why guessing at production issues doesn't work, and how observability gives you the clues to actually debug random failures."
 ---
 

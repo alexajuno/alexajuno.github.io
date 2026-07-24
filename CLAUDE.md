@@ -24,6 +24,5 @@
 ## Post Conventions
 
 - Filename: `slug.md` (descriptive name only, no date prefix; the date lives in frontmatter)
-- Frontmatter fields: title, date, description, categories (array)
-- Categories: `[tech]`
+- Frontmatter fields: title, date, description
 - Don't add `# Title` heading in post content. Title is rendered from frontmatter.

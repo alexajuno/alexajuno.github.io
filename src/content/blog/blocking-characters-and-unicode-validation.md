@@ -1,7 +1,6 @@
 ---
 title: "Blocking Characters and Unicode Validation"
 date: 2025-11-08 07:50:36 +0700
-categories: [tech]
 description: "What I learned about Unicode character categorization and why silently removing user input is almost always a bad UX decision."
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: "A world too big for one mind"
 date: 2026-06-16
-categories: [life]
 description: "I went to an AI out of loneliness and ended up asking what the machine is even for. A note on the extended mind, the centaur, and why I don't want the machine to be human."
 ---
 

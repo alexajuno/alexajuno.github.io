@@ -1,7 +1,6 @@
 ---
 title: "Building a Trending Algorithm for a Feedback Platform"
 date: 2026-02-24
-categories: [tech]
 description: "Why the Hacker News trending formula doesn't work for feedback platforms, and how a simple vote-velocity approach turned out to be the right answer."
 ---
 

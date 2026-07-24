@@ -1,7 +1,6 @@
 ---
 title: "Reflections on Security in Modern SaaS Products"
 date: 2025-10-24 12:00:00 +0000
-categories: [tech, security]
 description: "Reviewing a real SaaS product's security posture and reflecting on how modern frameworks handle threats versus where human factors still fall short."
 ---
 

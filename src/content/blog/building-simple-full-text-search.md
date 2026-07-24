@@ -1,7 +1,6 @@
 ---
 title: "Building a Simple Full-Text Search Feature"
 date: 2025-07-28 00:10:57 +0700
-categories: [tech]
 description: "Lessons from implementing full-text search with Typesense in a production app, from engine selection to search history UX."
 ---
 

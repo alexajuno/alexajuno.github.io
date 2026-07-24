@@ -2,7 +2,6 @@
 title: "Accepting defeat on the memory layer"
 date: 2026-07-24
 description: "Months of late nights on an agent memory layer, and the day I admitted I wasted my time."
-categories: [life]
 ---
 
 I had pain working with AI. I thought venting to it was a good thing. It made me feel better.

@@ -1,7 +1,6 @@
 ---
 title: "Vocational, Not Careerist"
 date: 2026-05-09
-categories: [life]
 description: "A Thursday-tired week, an afternoon off, a story about Carmack, and noticing what shape I'm actually built for."
 ---
 

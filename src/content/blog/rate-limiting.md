@@ -1,7 +1,6 @@
 ---
 title: "Rate Limiting and Identifying Users"
 date: 2025-09-24 11:30:00 +0700
-categories: [tech]
 description: "Exploring rate limiting strategies and the harder problem underneath: reliably identifying clients across sessions."
 ---
 

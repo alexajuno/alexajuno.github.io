@@ -1,7 +1,6 @@
 ---
 title: "Something is wrong with me"
 date: 2026-03-03
-categories: [life]
 description: "About the feeling that freezes you in place when you think you are the problem."
 ---
 

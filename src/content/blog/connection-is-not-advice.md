@@ -1,7 +1,6 @@
 ---
 title: "Wanting to be seen"
 date: 2026-03-12
-categories: [life]
 description: "About what happens when you open up to someone and they give you a lecture instead of sharing back."
 ---
 

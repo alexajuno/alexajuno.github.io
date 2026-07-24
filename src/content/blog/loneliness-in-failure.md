@@ -2,7 +2,6 @@
 title: Loneliness in failure
 date: 2026-05-23
 description: I lost a few games at a company event. The loss wasn't the hard part.
-categories: [life]
 ---
 
 Company organized a few games for the summer. I lost a few. I was sad. I keep losing.

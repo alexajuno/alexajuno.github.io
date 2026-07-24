@@ -1,7 +1,6 @@
 ---
 title: "A gap between knowing and feeling"
 date: 2026-03-10
-categories: [life]
 description: "About liking someone you barely knew, getting a clear answer, and still not being able to let go."
 ---
 

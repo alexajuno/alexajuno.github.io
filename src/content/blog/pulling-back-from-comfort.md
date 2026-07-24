@@ -1,7 +1,6 @@
 ---
 title: "Pulling back from comfort"
 date: 2026-03-08
-categories: [life]
 description: "Pulling back from comfort to chase harder problems."
 ---
 

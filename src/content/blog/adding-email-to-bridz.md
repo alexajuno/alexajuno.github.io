@@ -1,7 +1,6 @@
 ---
 title: "Adding Email to Bridz"
 date: 2026-02-15
-categories: [tech]
 description: "The journey from getting rejected by AWS SES to building a custom Laravel notification channel for Brevo email delivery."
 ---
 

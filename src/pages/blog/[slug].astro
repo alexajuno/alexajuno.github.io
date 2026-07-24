@@ -4,9 +4,7 @@ import PostFooter from "../../components/PostFooter.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog")).filter((post) =>
-    post.data.categories.includes("tech")
-  );
+  const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.id },
     props: { post },
@@ -17,7 +15,6 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const allPosts = (await getCollection("blog"))
-  .filter((p) => p.data.categories.includes("tech"))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 const currentIndex = allPosts.findIndex((p) => p.id === post.id);
