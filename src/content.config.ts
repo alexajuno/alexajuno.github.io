@@ -19,15 +19,4 @@ const projects = defineCollection({
   }),
 });
 
-const reading = defineCollection({
-  loader: file("./src/content/reading/links.yaml"),
-  schema: z.object({
-    title: z.string(),
-    url: z.string().url(),
-    note: z.string().optional(),
-    date: z.coerce.date(),
-    tags: z.array(z.string()).default([]),
-  }),
-});
-
-export const collections = { blog, projects, reading };
+export const collections = { blog, projects };
