@@ -11,14 +11,11 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
+  loader: file("./src/content/projects/projects.json"),
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    tech: z.array(z.string()).default([]),
-    github: z.string().url().optional(),
-    live: z.string().url().optional(),
-    order: z.number().default(0),
+    name: z.string(),
+    desc: z.string(),
+    link: z.string().url(),
   }),
 });
 

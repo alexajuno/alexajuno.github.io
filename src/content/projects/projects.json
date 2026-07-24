@@ -1,0 +1,20 @@
+[
+  {
+    "id": "imagenhub",
+    "name": "imagenhub",
+    "desc": "image gen model proxy",
+    "link": "https://imagenhub.ai"
+  },
+  {
+    "id": "bridz",
+    "name": "bridz",
+    "desc": "customer feedback management platform",
+    "link": "https://bridz.io"
+  },
+  {
+    "id": "phileas",
+    "name": "phileas",
+    "desc": "memory layer for agent",
+    "link": "https://github.com/alexajuno/phileas"
+  }
+]
