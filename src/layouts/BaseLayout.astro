@@ -1,17 +1,24 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
   ogType?: string;
+  /** Widen the page frame for multi-column layouts. Reading pages stay narrow. */
+  wide?: boolean;
 }
 
-const { title = "alexajuno", description, ogType = "website" } = Astro.props;
+const {
+  title = "alexajuno",
+  description,
+  ogType = "website",
+  wide = false,
+} = Astro.props;
 const canonicalURL = Astro.url;
+const container = wide ? "max-w-5xl" : "max-w-3xl";
 ---
 
 <html lang="en" class="">
@@ -65,11 +72,10 @@ const canonicalURL = Astro.url;
   <body
     class="min-h-screen bg-white font-sans text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100"
   >
-    <Header />
-    <main class="mx-auto max-w-3xl px-6 pb-12">
+    <Header container={container} />
+    <main class={`mx-auto ${container} px-6 pb-20`}>
       <slot />
     </main>
-    <Footer />
 
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "755d706dbd95439abeae9c15458a1399"}'></script>

@@ -7,6 +7,10 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   output: 'static',
   site: 'https://alexajuno.pages.dev',
+  redirects: {
+    '/about': '/',
+    '/projects': '/',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
