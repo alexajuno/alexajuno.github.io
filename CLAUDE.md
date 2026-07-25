@@ -26,3 +26,8 @@
 - Filename: `slug.md` (descriptive name only, no date prefix; the date lives in frontmatter)
 - Frontmatter fields: title, date, description
 - Don't add `# Title` heading in post content. Title is rendered from frontmatter.
+
+## Git
+
+- Commit directly to `main`. Don't branch first, and don't suggest branching.
+- **Why:** this is a solo personal site with no review flow, so a branch-and-PR step is pure overhead. This overrides the default "branch when on the default branch" behavior.
